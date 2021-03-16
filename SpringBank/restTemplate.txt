@@ -1,0 +1,24 @@
+	public Map<String, String> getOrgAccessTokenRestTemplate() {
+		String reqURL = host + "/oauth/2.0/token";   
+		
+
+        
+        MultiValueMap<String, String> param = new LinkedMultiValueMap<String, String>();
+        param.add("client_id", client_id);
+        param.add("client_secret", client_secret);
+        param.add("scope", "oob");
+        param.add("grant_type", "client_credentials");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+
+        HttpEntity<MultiValueMap<String, String>> request = 
+        		new HttpEntity<MultiValueMap<String, String>>( param, headers);
+        
+        RestTemplate restTemplate = new RestTemplate();
+        Map map = restTemplate.postForObject(
+        		reqURL,
+		        request,
+		        Map.class		);
+        return map;
+	}
