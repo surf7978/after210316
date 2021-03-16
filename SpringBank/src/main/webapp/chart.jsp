@@ -51,7 +51,11 @@
         // Set chart options
         var options = {'title':'부서별 인원수',
                        'width':400,
-                       'height':300};
+                       'height':300,
+                       //옵션 포맷 추가가능 구글차트api >>> Axis options 에서 검색
+                       vAxis : {format:"#,###"},
+        			   gridlines:{count:10}               
+        };
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));

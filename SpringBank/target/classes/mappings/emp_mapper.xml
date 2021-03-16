@@ -12,8 +12,8 @@
 	<select id="getChartData" resultType="map">
 		select 
 			sum(sale_price) "totalPrice"
-			, to_char(sale_date, 'yyyy-MM-dd') "saleDate"
+			, to_char(sale_date, 'yyyy-MM') "saleDate"
 		from sale_tbl_10
-		group by sale_date
+		group by to_char(sale_date, 'yyyy-MM')
 	</select>
 </mapper>
