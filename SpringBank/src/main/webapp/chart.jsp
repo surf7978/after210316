@@ -57,7 +57,7 @@
         			   gridlines:{count:10}               
         };
 
-        // Instantiate and draw our chart, passing in some options.
+        // ColumnChart 이거 바꾸면 그래프 종류 바뀜
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
