@@ -68,7 +68,8 @@ public class ExcelPdfController {
 	@RequestMapping("/getChartData")
 	@ResponseBody
 	public List<Map<String, Object>> getChartData(){
-		/*
+	/*
+	public List<Map<String, String>> getChartData(){
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("name", "인사");
@@ -83,7 +84,7 @@ public class ExcelPdfController {
 		map.put("cnt", "20");
 		list.add(map);
 		return list; 
-		 * */
+	*/
 		return empMapper.getChartData();
 	}
 }
