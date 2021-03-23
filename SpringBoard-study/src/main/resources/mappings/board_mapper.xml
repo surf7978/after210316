@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.temp.board.service.impl.BoardMapper">	<!--패키지명과 인터페이스까지 넣어야 이링크가 실행파일이란것을선언한다. BoardMapper가 읽어온다.  -->
+	<select id="getBoardList" resultType="com.company.temp.board.service.BoardVO">
+		SELECT *						<!--리서트타입 여러건수를 저장할떄 쓴다..
+										 원래는 패키지 명까지com.company.temp.board.service.BoardVO 
+										 다적어줘야한다. 리퀘스트매핑과같다.-->
+			FROM BOARD
+	</select>
+		<select id="getBoard" resultType="com.company.temp.board.service.BoardVO"
+								parameterType="com.company.temp.board.service.BoardVO"						>
+		SELECT *						<!--#{}값이 하나 있어서 파라미터를 넣어줌		단건조회는 get으로 써줌ㅂ통
+											컬럼이 여러개면 BoardVO , 한개면 int를 적어준다		-->
+			FROM BOARD
+			WHERE SEQ =#{seq}
+	</select>
+	
+	
+	
+	<insert id="insertBoard" parameterType="int">		 <!--샵 중괄호 있어서 파라미터 타입으로 써줌  -->
+		INSERT INTO BOARD								<!-- 리설트와 파라미터비교 -->
+		VALUES(#{seq} , #{title})
+	</insert>	
+	<!-- 프로퍼티에서 context root 에서 / 로 설정해 주었다. -->
+	
+	
+	<!-- 게시글의 댓글 목록 -->
+	<select id="getReplyList" resultType="ReplyVO">
+		SELECT * 
+		FROM REPLY 
+		WHERE BOARD_SEQ =#{board_seq}
+	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertReply">
+	INSERT INTO REPLY(SEQ, CONTENT, BOARD_SEQ) 
+				VALUES(
+				(SELECT NVL(MAX(SEQ),0)+1) FROM REPLY),
+				#{Content}
+			  , #{board_seq}
+			 	 )
+	</insert>
+	
+	
+</mapper>
